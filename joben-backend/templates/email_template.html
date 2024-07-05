@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-image: url('./application.jpeg');
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #333;
+    }
+    .content {
+      line-height: 1.6;
+    }
+    .content p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Application for {{ job_title }} Position</h2>
+    </div>
+    <div class="content">
+      <p><strong>Applicant:</strong> {{ first_name }} {{ last_name }}</p>
+      <p><strong>Email:</strong> {{ user_email }}</p>
+      <p><strong>Contact Info:</strong> {{ contact_info }}</p>
+    </div>
+  </div>
+</body>
+</html>

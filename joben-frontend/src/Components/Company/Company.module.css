@@ -1,0 +1,757 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+@import url('./reset.css');
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.profilewrapper {
+  background-image: url('../../Assets/Back.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 400vh;
+  overflow: hidden;
+}
+.timelinecontainer {
+    padding-left: 75px;
+    padding-right: 460px;
+    z-index: -50;
+  }
+
+  .timelineheader {
+    position: relative;
+    height: 240px;
+
+  }
+  .covercontainer {
+    position: relative;
+  }
+
+  .coverimage {
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    max-height: 350px;
+    object-fit: cover; /* Add object-fit property */
+    border-radius: 30px;
+  }
+
+ .editicon1 {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 20px;
+    right: 3px;
+    font-size: 10px;
+    color: white;
+    cursor: pointer;
+    fill: white;
+  }
+  .editicon2 {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 10px;
+    color: white;
+    cursor: pointer;
+    fill: white;
+  }
+
+  .profileimagecontainer {
+    position: absolute;
+    bottom: -210px; /* Adjust bottom spacing */
+    right: 910px; /* Add right spacing */
+  }
+
+  .profileimage {
+    object-fit: cover;
+    border: 4px solid white;
+    width: 190px;
+    height: 195px;
+    border-radius: 50%; /* Ensure rounded shape */
+  }
+ 
+  .editoptions {
+    position: absolute;
+    top: 40px; /* Adjust this value as needed */
+    right: 0;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .editoptions button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background-color: #f0f0f0 ;
+    cursor: pointer;
+  }
+  
+  .editoptions button:hover {
+    background-color:#EBEDEF;
+  }
+  
+  .editicon {
+    cursor: pointer;
+  }
+  
+  /* Add curve effect when options are hidden */
+  .editicon::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    transform: translateX(-50%) rotate(45deg);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .editicon:hover::before {
+    top: calc(100% + 5px);
+  }
+
+  .profiletext h2{
+    font-size: 27px;
+    font-family: 'Nunito', sans-serif;
+    margin-top: 115px;
+    margin-left: 10px;
+    
+  }
+
+.profiletext p{
+    font-family: 'Nunito',sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 12px;
+    margin-top: 25px;
+
+}
+
+
+.location{
+  margin-top: 1px;
+  margin-right: 780px;
+  margin-top: 15px;
+
+}
+
+.location p{
+  font-size: 14px;
+  color: grey;
+  cursor: pointer;
+  margin-left: 12px;
+
+}
+
+.timelinecontainer .editlink{
+    font-size: 14px;
+    position: absolute;
+    top: 45%;
+    left: -2.5%;
+    padding: 20px;
+    display: right;
+    margin-top: 500px; 
+    margin-right: 5px;
+    
+}
+
+
+.registerlink p a{
+    color: #4141BF;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+.editlink p {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.editlink a {
+  text-decoration: none; /* Remove underline from links */
+  color: #4141BF; /* Set link color */
+}
+
+.divider {
+  width: 100%; /* Set the width to cover the entire container */
+  border-bottom: 1px solid rgba(201, 191, 191, 0.5); /* Set the border to create the line */
+  margin-top: 140px; /* Add margin to space the line from the content above */
+}
+.divider2 {
+  width: 100%; /* Set the width to cover the entire container */
+  border-bottom: 1px solid rgba(201, 191, 191, 0.5); /* Set the border to create the line */
+}
+
+.jobs h3{
+    font-family: 'Nunito',sans-serif;
+    font-size: 24px;
+    color: #8691CB;
+    margin-left: 350px;
+    margin-top: 35px;
+}
+
+.jobContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 10px;
+    max-width: 1830px;
+    margin: 0 auto;
+    margin-top: 25px;
+  }
+  
+  .singleJob {
+    box-sizing: border-box;
+    flex: 1 1 250px;
+    max-width: 360px; 
+    max-height: 410px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer; 
+    display: flex;
+    margin-bottom: 20px; 
+    flex-direction: column;
+  }
+  
+  
+  .flex_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .text_heading {
+    font-size: 16px;
+    font-weight: 600; 
+    color: #333;
+  }
+  
+  .span {
+    display: flex;
+    align-items: center;
+    color: #ccc;
+    gap: 10px;
+  }
+
+  .jobDetails {
+    overflow: hidden;
+  }
+  
+  .custom_paragraph {
+    font-size: 13px;
+    color: #959595; 
+    padding-top: 20px; 
+    border-top: 2px solid #ccc; 
+    margin-top: 20px;
+    height: 410px;
+    width: 400;
+    overflow: hidden;
+   
+  }
+  
+  .company_container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+  
+  .company_name {
+    font-size: 14px; 
+    display: block;
+    margin: 10px;
+  }
+  
+  
+  /* CSS */
+  
+  .button13 {
+    background-color: #4141BF;
+    border: 1px solid #d5d9d9;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 6px 0 px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    width: 100px;
+    border: none;
+    margin: 4px;
+  }
+  
+  
+  
+  /* CSS */
+  .button17 {
+    align-items: center;
+    appearance: none;
+    background-color: #F0F0F5;
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #3c4043;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-size: 14px;
+    font-weight: 400;
+    height: 40px;
+    justify-content: center;
+    line-height: normal;
+    width: 100px;
+    max-width: 80px;
+    padding: 2px 10px;
+    margin: 3px;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+  }
+  
+  .button17:hover {
+    background: #F6F9FE;
+    color: #174ea6;
+  }
+
+  .showMoreButton{
+    background-color: #4141BF;
+    border: 1px solid #d5d9d9;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 6px 0 px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    width: 100px;
+    border: none;
+    margin: 4px;
+    margin-top: 40px;
+
+  }
+
+  .MoreButton{
+    position: relative;
+    margin-left: 1350px;
+    margin-top: 480px;
+    background-color: #8691CB;
+    border: 1px solid #d5d9d9;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 13px;
+    width: 100px;
+    height: 35px;
+    
+  }
+
+  .singleJobb{
+    max-width: 200px; 
+    max-height: 410px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer; 
+    display: flex;
+    margin-bottom: 20px; 
+    flex-direction: column;
+    margin-left: 1400px;
+    margin-top: 20px;
+    gap: 5px;
+
+  }
+
+   @media only screen and (max-width: 1024px) {
+    .profile-wrapper {
+      height: auto;
+    }
+  
+    .timeline-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  
+    .profile-image-container {
+      bottom: -100px;
+      right: 120px;
+    }
+  
+    .profile-text h2 {
+      margin-left: -205px;
+    }
+  
+    .location {
+      margin-right: 155px;
+    }
+  }
+  
+  /* Media queries for tablets and smaller devices */
+  
+  @media only screen and (max-width: 768px) {
+    .profile-text h2 {
+      margin-left: -85px;
+    }
+  
+    .location {
+      margin-right: 115px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .profile-text h2 {
+      margin-left: -85px;
+    }
+  
+    .location {
+      margin-right: 115px;
+    }
+  }
+  
+  /* Media queries for mobile devices */
+  
+  @media only screen and (max-width: 480px) {
+    .profile-wrapper {
+      height: auto;
+    }
+  
+    .timelinecontainer {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  
+    .profileimagecontainer {
+      bottom: -100px;
+      right: 20px;
+    }
+  
+    .profiletext h2 {
+      margin-left: -70px;
+      font-size: 24px;
+    }
+  
+    .location {
+      margin-right: 85px;
+    }
+  
+    .registerlink p a {
+      font-size: 12px;
+    }
+  
+    .editlink p {
+      margin-left: 10px;
+    }
+  }
+
+/*---------------------------*/
+
+  .sectionheader {
+    text-align: center;
+    margin: 0 auto;
+    padding: 40px 0;
+    font: 300 60px 'Oswald', sans-serif;
+    color: #4141BF;
+    margin-top: 90px;
+    text-transform: uppercadirect-contact-containerse;
+    letter-spacing: 6px;
+  }
+  
+  .contactwrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 20px;
+    margin-left: 5px;
+    position: relative;
+    max-width: 865px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);;
+    border-radius: 20px;
+    color: black;
+    user-select: none;
+    touch-action: manipulation;
+
+
+  }
+  
+  .formhorizontal {
+    max-width: 400px;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 400;
+  }
+  
+  .formcontrol {
+    width: 480px;
+    max-width: 400px;
+    max-height: 70px;
+    background-color: white;
+    margin-bottom: 50px;
+    color: black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    border-color: grey;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    border-style: none;
+  }
+
+  
+  .sendbutton {
+    background-color: #4141BF;
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    height: 5right0px;
+    width: 160px;
+    margin-top: 70px; 
+    margin-left: 10px;
+    
+
+  }
+ 
+  
+  
+  
+  .altsendbutton {
+    width: 400px;
+    height: 34px;
+    transition: all .2s ease-in-out;
+  }
+  
+  .sendtext {
+    display: block;
+    margin-top: 10px;
+    font: 700 12px 'Lato', sans-serif;
+    letter-spacing: 2px;
+  }
+  
+
+  /* Begin Right Contact Page */
+  .directcontactcontainer {
+    max-width: 400px;
+    font-size: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Location, Phone, Email Section */
+  .contactlist {
+    list-style-type: none;
+    margin-left: -30px;
+    padding-right: 20px;
+  }
+  
+  .list_item {
+    line-height: 4;
+    color: #aaa;
+  }
+  
+  .contact_text {
+    font: 300 18px 'Lato', sans-serif;
+    letter-spacing: 1.9px;
+    color: black;
+  }
+  
+  .place {
+    margin-left: 62px;
+  }
+  
+  .phone {
+    margin-left: 56px;
+  }
+  
+  .gmail {
+    margin-left: 53px;
+  }
+  
+  .contact_text a {
+    color: black;
+    text-decoration: none;
+    transition-duration: 0.2s;
+  }
+  
+  .contact_text a:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  
+  .socialmedialist {
+    position: relative;
+    font-size: 22px;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .socialmedialist li a {
+    color: grey;
+  }
+  
+  .socialmedialist li {
+    position: relative; 
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    margin: 10px 3px;
+    line-height: 60px;
+    border-radius: 50%;
+    color: black;
+    background-color:white;
+    cursor: pointer; 
+    transition: all .2s ease-in-out;
+  }
+  
+  .socialmedialist li:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 0 1px #4141BF;
+    transition: all .2s ease-in-out;
+  }
+  
+
+  
+  .socialmedialist li:hover:after {
+    opacity: 1;  
+    transform: scale(1.12);
+    transition-timing-function: cubic-bezier(0.37,0.74,0.15,1.65);
+  }
+  
+  .socialmedialist li:hover a {
+    color: #000;
+  }
+  
+  .copyright {
+    font: 200 14px 'Oswald', sans-serif;
+    color: #555;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  
+  hr {
+    border-color: rgba(3, 3, 3, 0.6);
+  }
+
+  .contact_icon {
+    color: white;
+    background-color: white;
+  }
+  
+  /* Begin Media Queries*/
+  @media screen and (max-width: 850px) {
+    .contactwrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    .directcontactcontainer, .formhorizontal {
+      margin: 0 auto;
+    }  
+    
+    .directcontactcontainer {
+      margin-top: 60px;
+      max-width: 300px;
+    }    
+    .socialmedialist li {
+      height: 60px;
+      width: 60px;
+      line-height: 60px;
+    }
+    .socialmedialist li:after {
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+    }
+  }
+  
+  @media screen and (max-width: 569px) {
+  
+    .directcontactcontainer, .formwrapper {
+      float: none;
+      margin: 0 auto;
+    }  
+    .form_control, textarea {
+      
+      margin: 0 auto;
+    }
+   
+    
+    .name, .email, textarea {
+      width: 280px;
+    } 
+    
+    .directcontactcontainer {
+      margin-top: 60px;
+      max-width: 280px;
+    }  
+    .socialmedialist {
+      left: 0;
+    }
+    .socialmedialist li {
+      height: 55px;
+      width: 55px;
+      line-height: 55px;
+      font-size: 2rem;
+    }
+    .socialmedialist li:after {
+      width: 55px;
+      height: 55px;
+      line-height: 55px;
+    }
+    
+  }
+  
+  @media screen and (max-width: 410px) {
+    .sendbutton {
+      width: 99%;
+    }
+  }
+
+

@@ -1,0 +1,104 @@
+/*------------------Post/Find a Job------------------*/
+.row {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+  
+.column {
+    width: 510px;
+    margin: 30px;
+    padding: 30px;
+    border: none;
+    background-color: #f9f9f9; 
+    border-radius: 28px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+}
+  
+.column2 {
+    width: 510px;
+    margin: 30px;
+    padding: 30px; 
+    border: none;
+    background-color: #4141BF;
+    color: white; 
+    border-radius: 28px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer;
+}
+
+.column2 .h22 {
+    color:white;
+}
+
+.h21tit, .h22tit {
+    font-size: 24px;
+}
+
+.h21tit {
+    color: #4141BF;
+}
+
+.h22tit {
+    color: white;
+}
+  
+.column h2,
+.column p,
+.column button,
+.column2 h2,
+.column2 p,
+.column2 button {
+    margin-bottom: 20px;
+}
+
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+  
+  
+.btn-primary1 {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    background-color: #4141BF;
+    color: white;
+    border-radius: 40px;
+    transition-property: all;
+    transition-duration: 300ms;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary1:hover {
+    color: #4141BF;
+    background-color: white;
+}
+  
+.btn-primary2 {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    background-color: white;
+    color: #4141BF;
+    border-radius: 40px;
+    transition-property: all;
+    transition-duration: 300ms;
+    cursor: pointer;
+}
+
+.btn-primary2:hover {
+    background-color: #4141BF;
+    color: white;
+}

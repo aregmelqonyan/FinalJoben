@@ -1,0 +1,104 @@
+.background {
+  background-image: url("../../Assets/Home.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%; 
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentheader {
+  text-align: center;
+  width: 500px;
+}
+
+.contentheader h1 {
+  font-size: 2rem;
+  width: 500px;
+  margin-bottom: 10px;
+}
+
+.contentheader p {
+  font-size: 1.2rem;
+  margin-top: 10px; 
+  margin-bottom: 10px;
+}
+
+.contentheader button {
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  background-color: #4141BF;
+  color: white;
+  border-radius: 40px;
+  transition-property: all;
+  transition-duration: 300ms;
+  cursor: pointer;
+}
+
+
+
+/*------------------Search Bar------------------*/
+/* Search.module.css */
+.searchDivformain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin: 60px;
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+.firstDivformain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    width: 1000px;
+    height: 80px;
+    border-radius: 20px;
+}
+
+.innerDiv {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+}
+
+.close {
+    font-size: 30px;
+    transition: color 0.3s ease;
+    color: #4141BF;
+    cursor: pointer;
+}
+.buttonforsearchformain {
+    background-color: #4141BF;
+    border: 1px solid #d5d9d9;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 13px;
+    height: 40px;
+    padding: 0 10px 0 11px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    width: 100px;
+    border: none;
+}
+.buttonforsearchformain:hover {
+    background-color: #4141BF;
+}

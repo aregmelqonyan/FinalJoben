@@ -1,0 +1,131 @@
+/* Search.module.css */
+.searchDiv {
+    display: grid;
+    padding: 2rem;
+    margin: 60px;
+    border-radius: 20px;
+}
+  
+.firstDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    gap: 10px;
+    margin: 20px;
+    padding: 25px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  
+    width: 1000px;
+    margin-left: 150px;
+}
+  
+.innerDiv {
+    display: flex;
+    align-items: center;
+}
+/* Search.module.css */
+.icon {
+    font-size: 25px;
+    cursor: pointer;
+}
+  
+.textarea {
+    background-color: transparent;
+    color:  #4141BF;
+    outline: none;
+    width: 100%;
+    border: none;
+}
+.close {
+    font-size: 30px;
+    transition: color 0.3s ease; 
+    color: #4141BF;
+    cursor: pointer;
+}
+.buttonforsearch {
+    background-color: #4141BF;
+    border: 1px solid #d5d9d9;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 10px 0 11px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    width: 100px;
+    border: none;
+}
+.buttonforsearch:hover {
+    background-color: #4141BF;
+}
+.SecondDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  
+    width: 800px;
+    margin: 10px;
+    margin-left: 300px;
+}
+.SingleSearch {
+    display: flex;
+    align-items: center;
+}
+.HtmlForm {
+    color: #4141BF;
+    font-weight: 500;
+    margin: 20px;
+}
+.Selecting {
+    background-color: white;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border: none;
+    border-radius: 10px;
+}
+.Clear {
+    background-color: #4141BF;
+    border: 1px solid #d5d9d9;
+    color: white;
+    margin: 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 10px 0 11px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    touch-action: manipulation;
+    width: 100px;
+    border: none;
+}
+.Clear:hover {
+    background-color: #4141BF;
+}
+@media (max-width: 968px) {
+    .searchDiv {
+        padding: 2rem; /* Adjust padding for smaller screens */
+    }
+    
+    .firstDiv {
+        align-items: stretch; /* Stretch items to full width */
+        gap: 10px; /* Reduce gap between items */
+        margin: 0px auto; /* Center the firstDiv horizontally */
+    }
+    .SecondDiv {
+        width: 100%; /* Adjust width for smaller screens */
+        margin: 0px auto; /* Center the SecondDiv horizontally */
+    }
+}

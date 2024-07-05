@@ -1,0 +1,156 @@
+.SkillsCotainer {
+    display: flex;
+    width: 965px;
+    height: 305px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 15px 0px #4E54D733;
+    border-radius: 14px;
+    margin-top: 35px;
+    flex-direction: column;
+    padding: 20px;
+    overflow: hidden; /* Keep this to hide overflowing elements */
+}
+
+.SkillsHeader {
+    padding: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.SkillsTitle {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
+}
+
+.SkillsHederLinks {
+    display: flex;
+    width: 66px;
+    height: 29px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.addButton {
+    width: 24px;
+    height: 24px;
+    font-weight: 600;
+    font-size: 26px;
+}
+
+.SkillsParagraph {
+    width: 290px;
+    height: 18px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: left;   
+    margin-left: 35px;
+}
+
+.AddSkillsItems {
+    width: 145px;
+    height: 44px;
+    border-radius: 22px;
+    border: 1px solid #6E6E9B;  
+    margin-top: 45px;
+    margin-left: 35px;
+    box-shadow: 0px 2px 6px 0px #00000040;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+    
+.AddSkillsItemsItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.AddSkillsItemsItemPlus {
+    font-weight: 800;
+    color: #6E6E9B;
+    font-size: 20px;
+}
+
+.AddSkillsItemsItemText {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: center;
+    color: #6E6E9B;
+}
+
+.seeMore {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #4141BF;  
+    display: flex;
+    justify-content: right; 
+    margin-top: 20px;
+}
+
+.SkillItem {
+    display: flex;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 19.36px;
+    align-items: center;
+    color: #6E6E9B;
+    width: fit-content;
+    height: 41px;
+    border-radius: 22px;
+    border: 1px solid;
+    justify-content: center;
+    padding: 8px;
+}
+
+.SkillsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    row-gap: 40px;
+    padding-right: 10px;
+    height: 100px; /* Set a fixed height to allow scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Customize the scrollbar */
+.SkillsList::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.SkillsList::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the scrollbar track */
+    border-radius: 8px;
+}
+
+.SkillsList::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar thumb */
+    border-radius: 10px;
+}
+
+.SkillsList::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar thumb on hover */
+}
+
+.editButton{
+    width: 24px;
+    height: 24px;
+    font-weight: 600;
+    font-size: 26px;
+}

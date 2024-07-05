@@ -1,0 +1,149 @@
+@import url(/src/Assets/styles/reset.module.css);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.ProfileName{
+    display: flex;
+    background-color: rgb(251,251,255);
+    width: 100%;
+    /* margin: 0 auto; */
+    }
+    
+.ProfileNameItems {
+    display: flex;
+    min-height: 345px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.ProfileNameItemsPicture{
+    margin-top: 87px;
+    width: 165px;
+    height: 165px;
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    /* margin-left: 250px; */
+}
+
+.ProfileNameItemsTextItems{
+    display: flex;
+    flex-direction: column;
+    margin-left: 49px;
+    gap: 18px;
+}
+
+.ProfileNameItemsTexts{
+    width: 566px;
+    height: 148px;
+    margin-top: 87px;
+    gap: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ProfileNameItemsTextsHeader{
+    font-family: Inter;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 33.89px;
+    text-align: left;
+    width: 209px;
+    height: 34px;
+    white-space: nowrap;
+    
+}
+
+.ProfileNameItemsTextsParagraph{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    color: #6D6D80;
+    width: 566px;
+    height: 96px;
+    
+}
+
+.ProfileNameItemsLinks{
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+}
+
+.ProfileNameItemsLinksPhone{
+    display: flex;
+    gap: 10px
+}
+
+.ProfileNameItemsLinksMail{
+    display: flex;
+    gap: 10px
+}
+
+.ProfileNameItemsLinksAddress{
+    display: flex;
+    gap: 10px
+}
+
+.ProfileNameItemsLinksText{
+    color: #000000;
+    font-family: Nunito;
+    line-height: 22px;
+    text-align: left; 
+}
+
+.ProfileNameEditItems{
+    height: 271px;
+    width: 121px;
+    margin-top: 45px;
+    margin-right: 200px;
+    gap: 206px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProfileNameEditItemsEdit{
+    width: 121px;
+    height: 21px;
+    font-family: Inter;
+    line-height: 21px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.ProfileNameEditItemsEditLinks{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.ProfileNameEditItemsEditLinksBtn{
+    height: 44px;
+    width: 44px;
+    border-radius: 64px;
+    background-color: #4141BF;
+    align-items: center;
+}
+.UploadContainer {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .UploadButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #4141BF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+  }
+  
+  input[type="file"] {
+    display: none; /* Hide the file input */
+  }

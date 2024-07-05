@@ -1,0 +1,39 @@
+.ContactUsContainer {
+    width: 1196px;
+    height: 667px;
+    border-radius: 10px;
+    top: 233px;
+    left: 122px;
+    color: #FFFFFF;
+}
+
+.ContactUsInformation {
+    background-color: #4141BF;
+    width: 491px;
+    height: 647px;
+
+}
+
+.ContactUsInformation .Information {
+    width: 272px;
+    height: 34px;
+    top: 40px;
+    left: 40px;
+    color: #FFFFFF;
+    font: Inter;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 33.89px;
+}
+
+.ContactUsInformation .Start {
+    width: 290px;
+    height: 22px;
+    top: 88px;
+    left: 40px;
+    font: Inter;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21.78px;
+    color: #C9C9C9;
+}

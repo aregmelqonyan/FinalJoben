@@ -1,0 +1,53 @@
+/* -------------------How we do--------------------- */
+
+.flexcontainerhow {
+    display: flex;
+    justify-content: space-between; 
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.HowToh2 {
+    font-size: 40px;
+    color: #4141BF;
+}
+  
+.Description {
+    text-align: center;
+}
+
+.flexcontainerhow > div {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+  
+.flexcontainerhow > div img {
+    width: 50px;
+    margin: 20px;
+}
+  
+
+.flexcontainerhow .box1 {
+    width: 400px;
+    max-width: 350px;
+    margin: 40px;
+    padding: 30px;
+    line-height: 30px;
+    align-items: center;
+}
+
+.box1 p {
+    width: 260px;
+}
+
+.flexcontainerhow .box1 .lilicon {
+    width: 50px;
+    align-items: center;
+}
+  
+.flexcontainerhow .box1 .blackicon {
+    width: 60px;
+    align-items: center;
+}

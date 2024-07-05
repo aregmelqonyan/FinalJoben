@@ -1,0 +1,58 @@
+.job-details {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin: 0 auto; 
+    background-image: url('../../Assets/Back.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* width: 80%; */
+  }
+  
+  .job-details h2 {
+    color: #333;
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .job-details p {
+    margin-bottom: 10px;
+  }
+  
+  .job-details strong {
+    font-weight: bold;
+  }
+  
+  .job-details p:nth-child(even) {
+    /* background-color: #f9f9f9; */
+    padding: 5px;
+    border-radius: 3px;
+  }
+  
+  .job-details p:nth-child(odd) {
+    padding: 5px;
+    background-color: white;
+  }
+
+  .buttonforApply {
+    background-color: #4141BF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .buttonforApply:hover {
+    background-color: #0056b3;
+  }
+  
+  
