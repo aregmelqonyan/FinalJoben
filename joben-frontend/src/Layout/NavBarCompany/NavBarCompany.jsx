@@ -63,6 +63,8 @@ const NavBarCompany = () => {
             <NavLink to='/blog'><i className="fas fa-newspaper"></i> Blog</NavLink>
             <NavLink to='/resume-builder'><i className="fas fa-file-alt"></i> Resume Builder</NavLink>
             <NavLink to='/posted-jobs'><FaClipboardList /> Posted Jobs</NavLink>
+            <NavLink to='/posted-jobs'><i class="fas fa-cog"></i>Settings</NavLink>
+
           </nav>
           <div className={styles.profileLink}>
             <div className={styles.dropdown}>

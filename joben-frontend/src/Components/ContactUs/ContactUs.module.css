@@ -1,39 +1,324 @@
-.ContactUsContainer {
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+body{
+    background-color: gray;
+}
+
+.wrapper{
+    display: flex;
+    margin: 0 auto;
+    /* align-items: center; */
     width: 1196px;
     height: 667px;
-    border-radius: 10px;
-    top: 233px;
-    left: 122px;
-    color: #FFFFFF;
+    background-color: red;
+    margin-top: 90px;
+    justify-content: space-between;
+    box-shadow: 0px 0px 60px 30px #00000008;
+    border-radius: 12px;
+    background-color: #FFFFFF;
 }
 
-.ContactUsInformation {
+.contactInfo{
+    width: 490px;
+    height: 648px;
     background-color: #4141BF;
-    width: 491px;
-    height: 647px;
-
+    margin-left: 10px;
+    margin-top: 10px;
+    /* box-shadow: 0px 0px 60px 30px #00000008; */
+    border-radius: 12px;
 }
 
-.ContactUsInformation .Information {
-    width: 272px;
+.contactInfoContainer{
+    margin-top: 40px;
+    margin-left: 40px;
+    height: 580px;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: column;
+}
+
+.contactInfoHeader{
+    width: 290px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: column;
+    gap: 14px;
+}
+
+.contactInfoHeaderTitle{
+    width: 290px;
     height: 34px;
-    top: 40px;
-    left: 40px;
-    color: #FFFFFF;
-    font: Inter;
-    font-weight: 600;
+    font-family: Inter;
     font-size: 28px;
-    line-height: 33.89px;
+    font-weight: 600;
+    line-height: 34px;
+    text-align: left; 
+    color: #FFFFFF;
 }
 
-.ContactUsInformation .Start {
+.contactInfoHeaderSubtitle{
     width: 290px;
     height: 22px;
-    top: 88px;
-    left: 40px;
-    font: Inter;
-    font-weight: 400;
+    font-family: Inter;
     font-size: 18px;
-    line-height: 21.78px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
     color: #C9C9C9;
+}
+
+.contactInfoAddresses{
+    width: 337px;
+    height: 186px;
+    gap:52px;
+    display: flex;
+    flex-flow: column;    
+}
+
+.contactInfoAddressesPhone{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 190px;
+    height: 24px;    
+    gap: 27px;
+}
+
+.contactInfoAddressesPhoneLogo{
+    width: 18px;
+    height: 18px;
+}
+
+
+.contactInfoAddressesPhoneValue{
+    /* width: 124px; */
+    height: 20px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: left;
+    color: #FFFFFF;  
+}
+
+.contactInfoAddressesEmail{
+    width: 184px;
+    height: 24px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 27px;
+}
+
+.contactInfoAddressesEmailLogo{
+    width: 20px;
+    height: 16px;
+}
+
+.contactInfoAddressesEmailValue{
+    width: 136px;
+    height: 20px;  
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    color: #FFFFFF;
+    all: unset;
+}
+
+.contactInfoAddressesEmailValueParagraph{
+    width: 136px;
+    height: 20px;
+    color: white;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    /* text-align: left; */
+}
+.contactInfoAddressesStreet{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 27px;
+}
+
+.contactInfoAddressesStreetLogo{
+    width: 32px;
+    height: 32px;
+}
+
+.contactInfoAddressesStreetValue{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    all: unset;
+    /* color: #FFFFFF; */
+}
+
+.contactInfoAddressesStreetValueParagraph{
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.contactInfoSocMedias{
+    display: flex;
+    flex-flow: row;
+    width: 150px;
+    height: 40px;
+    justify-content: space-between;
+}
+
+.contactInfoSocMedia{
+    width: 40px;
+    height: 40px;
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 50%;
+}
+
+.contactInfoSocMedia{
+    color:#4141BF;
+}
+
+.message{
+    width: 696px;
+    height: 450px;
+    /* background-color:burlywood; */
+    margin-top: 60px;
+    margin-left: 50px;
+    /* align-items: center;
+    display: flex; */
+}
+
+.messageContainer{
+    display: flex;
+    /* align-items: center; */
+    flex-flow: column;
+    gap: 45px;
+    width: 596px;
+}
+
+.messageInfo{
+    display: grid;
+    align-items: center;
+    row-gap: 45px;
+    column-gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.messageInfoName,
+.messageInfoLastname,
+.messageInfoMail,
+.messageInfoPhone{
+    display: flex;
+    flex-flow: column;
+    width: 280px;
+    height: 56px;
+    justify-content: space-between;
+}
+
+.messageInfoNameTitle,
+.messageInfoLastnameTitle,
+.messageInfoMailTitle,
+.messageInfoPhoneTitle,
+.messageInfoSendMessageTitle{
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    color: #8D8D8D;
+}
+
+.messageInfoNameInput,
+.messageInfoNameInput,
+.messageInfoNameInput,
+.messageInfoNameInput{
+    all: unset;
+    min-height: 20px;
+    font-family: Inter;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+.messageLine{
+    width: 278px;
+    height: 1px;
+    background-color: #8D8D8D;
+}
+
+.messageSendMessage{
+    display: flex;
+    flex-flow: column;
+    width: 596px;
+    height: 56px;
+    justify-content: space-between;
+}
+
+.messageInfoSendMessageInput{
+    all: unset;
+    min-height: 20px;
+    font-family: Inter;
+}
+
+.messageInfoSendMessageInput::placeholder{
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+}
+
+.messageLineSendMesssage{
+    width: 596px;
+    height: 1px;
+    background-color: #8D8D8D;
+}
+
+.messageBtnContainer{
+    justify-content: right;
+    display: flex;
+}
+.messageBtn{
+    width: 209px;
+    height: 49px;
+    /* padding: 15px 48px 15px 48px; */
+    gap: 10px;
+    border-radius: 5px;
+    background-color: #4141BF;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+.messageBtn:hover{
+    background-color: #2e2edb;
+}
+
+.messageBtn:active{
+    background-color: black;
 }

@@ -482,7 +482,6 @@ def create_experience(experience: schemas.UserExperience, current_user: models.U
 def get_user_experience(current_user: models.CompanyUser = Depends(get_current_company_user), db: Session=Depends(get_db)):
     if not current_user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
-    print(current_user)
     user = crud.get_company_user_by_id(db, current_user.user_id)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
@@ -491,7 +490,7 @@ def get_user_experience(current_user: models.CompanyUser = Depends(get_current_c
 
 @app.post("/companyuser/experience/", response_model=schemas.UserExperience)
 def create_experience(experience: schemas.UserExperience, current_user: models.CompanyUser = Depends(get_current_company_user), db: Session = Depends(get_db)):
-    print(current_user)
+    print(current_user, 5000)
     if not current_user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unouthorized")
     

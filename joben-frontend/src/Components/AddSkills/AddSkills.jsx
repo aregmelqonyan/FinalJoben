@@ -39,23 +39,26 @@ const AddSkills = () => {
 
     const handleSave = async () => {
         const token = localStorage.getItem('accessToken');
+        const company = localStorage.getItem('company');
         if (!token) {
             console.error('No access token found, please log in');
             return;
         }
 
         try {
-            const response = await axios.post(
-                'http://localhost:8000/add_skill',
-                { skill: skillInput },
-                { headers: { Authorization: `Bearer ${token}` } }
-                
-            );
-            console.log('Skill added successfully:', response.data);
-            toggleComponents();
-            // Optionally update the UI or state here
-        } catch {
-            const response = await axios.post(
+            if(!company) {
+                const response = await axios.post(
+                    'http://localhost:8000/add_skill',
+                    { skill: skillInput },
+                    { headers: { Authorization: `Bearer ${token}` } }
+                    
+                );
+                console.log('Skill added successfully:', response.data);
+                toggleComponents();
+        }
+            else{
+                console.log(5000)
+                const response = await axios.post(
                 'http://localhost:8000/add_company_skill',
                 { skill: skillInput },
                 { headers: { Authorization: `Bearer ${token}` } }
@@ -63,6 +66,11 @@ const AddSkills = () => {
             );
             console.log('Skill added successfully:', response.data);
             toggleComponents();
+                }
+            // Optionally update the UI or state here
+        } catch(error) {
+            
+            console.log(error.message)
         }
     };
 

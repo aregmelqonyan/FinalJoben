@@ -114,6 +114,7 @@ const Experience = () => {
     const token = localStorage.getItem('accessToken');
     const refresh = localStorage.getItem('refreshToken');
     const navigate = useNavigate();
+    const company = localStorage.getItem('company');
 
     const refreshToken = async () => {
         try {
@@ -130,8 +131,10 @@ const Experience = () => {
     };
 
     const fetchExperience = async () => {
+        setLoading(true);
         try {
-            const response = await axios.get('http://localhost:8000/user/experience', {
+            const endpoint = company ? 'http://localhost:8000/companyuser/experience' : 'http://localhost:8000/user/experience';
+            const response = await axios.get(endpoint, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -139,23 +142,9 @@ const Experience = () => {
             setExperience(response.data);
         } catch (error) {
             if (error.response && error.response.status === 401) {
-                const newToken = await refreshToken();
-                if (newToken) {
-                    try {
-                        const response = await axios.get('http://localhost:8000/companyuser/experience', {
-                            headers: {
-                                'Authorization': `Bearer ${newToken}`
-                            }
-                        });
-                        setExperience(response.data);
-                    } catch (error) {
-                        setError(error.message);
-                    }
-                } else {
-                    setError('Unable to refresh token. Please log in again.');
-                }
+                setError('Unauthorized access. Please log in again.');
+                // navigate('/login'); // Uncomment this line if you want to navigate to login page on 401
             } else {
-                navigate('/login')
                 setError(error.message);
             }
         } finally {

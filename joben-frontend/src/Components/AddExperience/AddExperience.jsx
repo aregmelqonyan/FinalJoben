@@ -31,12 +31,15 @@ const AddExperience = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const company = localStorage.getItem('company');
         const dataToSend = { ...formData };
         if (formData.currently_working) {
             delete dataToSend.end_date;
         }
 
         try {
+            if (!company) {
+            console.log(2000);
             const response = await axios.post('http://localhost:8000/user/experience', dataToSend, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -48,10 +51,12 @@ const AddExperience = () => {
 
             // Close the form upon successful submission
             toggleComponents();
+            }
+            else{throw new Error("Failed")};
         } catch  {
             // console.error('Error:', error);
             try{
-            const response = await axios.post('http://localhost:8000/companyuser/experience', dataToSend, {
+            const response = await axios.post('http://localhost:8000/companyuser/experience/', dataToSend, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },

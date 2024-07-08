@@ -78,7 +78,7 @@ class Language(Base):
     __tablename__ = 'language'
 
     language_id = Column(Integer, primary_key=True)
-    language = Column(String(15), nullable=False)
+    language = Column(String(15), nullable=False, unique=True)
     proficiency = Column(String(40), nullable=False)
 
     user_id = Column(Integer, ForeignKey('users.user_id'))

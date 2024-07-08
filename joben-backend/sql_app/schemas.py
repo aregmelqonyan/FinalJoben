@@ -16,6 +16,7 @@ class UserSchema(BaseModel):
     user_id: int
     username: str
     email: str
+    sended_code: str
 
     class Config:
         from_attributes=True

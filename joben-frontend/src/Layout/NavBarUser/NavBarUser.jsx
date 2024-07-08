@@ -63,6 +63,7 @@ const NavBarUser = () => {
             <NavLink to='/companies'><i className="fas fa-building"></i> Companies</NavLink>
             <NavLink to='/blog'><i className="fas fa-newspaper"></i> Blog</NavLink>
             <NavLink to='/resume-builder'><i className="fas fa-file-alt"></i> Resume Builder</NavLink>
+            <NavLink to='/'><i class="fas fa-cog"></i>Settings</NavLink>
           </nav>
           <div className={styles.profileLink}>
             {/* Dropdown */}
