@@ -48,6 +48,11 @@ app.add_middleware(
 async def get_me(user: schemas.SystemUser = Depends(get_current_user)):
     return {"email": user.email, "username": user.username}
 
+@app.get('/profile/{user_id}')
+async def get_me(user_id: int, sb: Session = Depends(get_db)):
+    user = crud.get_company_user_by_id(db, user_id)
+    return {"email": user.email, "username": user.username}
+
 @app.get('/me')
 async def get_me(user: schemas.UserContact = Depends(get_current_user), db: Session = Depends(get_db)):
     user = crud.get_user_by_email(db, user.email)
@@ -160,6 +165,17 @@ async def get_me(user: schemas.CompanySystemUser = Depends(get_current_company_u
     image_str = None
     if user.image:
         image_str = base64.b64encode(user.image).decode("utf-8")
+    print(user.company)
+    return {"email": user.email, "username": user.username, "contact_info": user.contact_info, 'image': image_str, 'company': user.company}
+
+@app.get('/company_profile/{user_id}', summary='Get details of currently logged in user')
+async def get_me(user_id: int, db: Session = Depends(get_db)):
+    user = crud.get_company_user_by_id(db, user_id)
+    print(user)
+    image_str = None
+    if user.image:
+        image_str = base64.b64encode(user.image).decode("utf-8")
+    print(user.email)
     return {"email": user.email, "username": user.username, "contact_info": user.contact_info, 'image': image_str}
 
 
@@ -286,6 +302,12 @@ def get_companyuser_jobs(current_user: models.CompanyUser = Depends(get_current_
     
     return company_user.posted_jobs
 
+@app.get("/companyuser/jobs/{user_id}", response_model=list[schemas.JobSchema])
+def get_companyuser_jobs(user_id: int, db: Session = Depends(get_db)):
+    user = crud.get_company_user_by_id(db, user_id)
+    
+    return user.posted_jobs
+
 @app.get('/user/experience', response_model=list[schemas.UserExperience])
 def get_user_experience(current_user: models.User = Depends(get_current_user), db: Session=Depends(get_db)):
     if not current_user:
@@ -349,7 +371,27 @@ async def send_email(applied_data: schemas.EmailData, tasks: BackgroundTasks, db
         contact_info=applied_data.contact_info
     )
 
+
     mail_body = MailBody(subject=subject, recipient_email=applied_data.email, message=message, body=message)
+    tasks.add_task(send_mail, mail_body.dict())
+    return True
+
+@app.post("/send-email-contact", response_model=bool)
+async def send_email(applied_data: schemas.ContactUs, tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    print("This is email", applied_data.email)
+    subject = "Contact"
+    template = env.get_template("contact_us.html")
+    
+    message = template.render(
+        firstName=applied_data.firstName,
+        lastName=applied_data.lastName,
+        email=applied_data.email,
+        phoneNumber=applied_data.phoneNumber,
+        message=applied_data.message
+    )
+    print(applied_data.owner_email, 5000)
+
+    mail_body = MailBody(subject=subject, recipient_email=applied_data.owner_email, message=message, body=message)
     tasks.add_task(send_mail, mail_body.dict())
     return True
   
@@ -499,6 +541,11 @@ def create_experience(experience: schemas.UserExperience, current_user: models.C
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
+@app.get("/companyuser/experience/{user_id}", response_model=list[schemas.UserExperience])
+def get_experiences(user_id: int, db: Session=Depends(get_db)):
+    user = crud.get_company_user_by_id(db, user_id)
+    return user.experiences
+
 #Education
 
 @app.get('/user/education', response_model=list[schemas.UserEducation])
@@ -547,6 +594,12 @@ def create_education(education: schemas.UserEducation, current_user: models.Comp
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
+@app.get("/companyuser/education/{user_id}", response_model=list[schemas.UserEducation])
+def get_education(user_id: int, db: Session=Depends(get_db)):
+    user = crud.get_company_user_by_id(db, user_id)
+    print(user_id)
+    return user.education
+
 @app.post('/add_skill')
 def add_skill(skill: schemas.Skill, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     if not current_user:
@@ -583,6 +636,11 @@ def add_skill(current_user: models.CompanyUser = Depends(get_current_company_use
     user = crud.get_company_user_by_id(db, current_user.user_id)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="CompanyUser not found")
+    return user.skill
+
+@app.get('/companyskills/{user_id}', response_model=list[schemas.Skill])
+def get_skills(user_id: int, db: Session=Depends(get_db)):
+    user = crud.get_company_user_by_id(db, user_id)
     return user.skill
 
 @app.get('/user/skills/{user_id}', response_model=list[schemas.Skill])
@@ -629,7 +687,7 @@ def add_language(current_user: models.CompanyUser = Depends(get_current_company_
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="CompanyUser not found")
     return user.language
 
-@app.get('/user/languages/{user_id}', response_model=list[schemas.Language])
+@app.get('/companyuser/languages/{user_id}', response_model=list[schemas.Language])
 def get_languages(user_id: int, db: Session=Depends(get_db)):
     user = crud.get_company_user_by_id(db, user_id)
     return user.language

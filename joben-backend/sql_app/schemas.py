@@ -83,6 +83,15 @@ class EmailData(BaseModel):
     job_title: str
     contact_info: int
     user_email: str
+    resume: Optional[UploadFile] = None
+
+class ContactUs(BaseModel):
+    firstName: str
+    lastName: str
+    email: str
+    phoneNumber: str
+    message: str
+    owner_email: str
     
 
 class TokenPayload(BaseModel):
