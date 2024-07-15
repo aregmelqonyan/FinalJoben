@@ -40,7 +40,7 @@ const AddExperience = () => {
         try {
             if (!company) {
             console.log(2000);
-            const response = await axios.post('http://localhost:8000/user/experience', dataToSend, {
+            const response = await axios.post('https://api.joben.am/user/experience', dataToSend, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -56,7 +56,7 @@ const AddExperience = () => {
         } catch  {
             // console.error('Error:', error);
             try{
-            const response = await axios.post('http://localhost:8000/companyuser/experience/', dataToSend, {
+            const response = await axios.post('https://api.joben.am/companyuser/experience/', dataToSend, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },

@@ -1,23 +1,159 @@
-import React, {useState}from "react";
+import React, {useState, useEffect}from "react";
 import styles from './ContactUs.module.css';
+import NavBar from "../../Layout/NavBar";
+import NavBarCompany from "../../Layout/NavBarCompany";
+import NavBarUser from "../../Layout/NavBarUser";
+import Footer from "../../Layout/Footer";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+
+
 
 const ContactUs = ( ) => {
-    const phoneNumber = "+1 (123) 456-7890";
-    const email = "info@example.com";
-    const address = "132 Dartmouth Street Boston, Massachusetts 02156 United States";
+    const accessToken = localStorage.getItem('accessToken');
+    const company = localStorage.getItem('company');
+    const navigate = useNavigate();
+    const [message, setMessage] = useState('');
+    const {user_id} = useParams();
+    const [isError, setIsError] = useState(false);
+    const [errors, setErrors] = useState({});
+
+
+    const [contactInfo, setContactInfo] = useState({
+        contact_info: "",
+        email: "",
+        location: ""
+    });
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        message: "",
+        owner_email: ""
+    });
     const instagramLink = "https://www.instagram.com/yourprofile"; 
     const facebookLink = "https://www.facebook.com/yourprofile"; 
     const linkedinLink = "https://www.linkedin.com/in/yourprofile";
-    const [isActive, setIsActive] = useState(false);
-    const [rows, setRows] = useState([['', '', '']]);
+
     const handleEmailClick = () => {
-        window.location.href = `mailto:${email}`;
+        window.location.href = `mailto:${contactInfo.email}`;
       };
+
     const handleMapClick = () => {
-    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactInfo.location)}`;
     window.open(mapUrl, '_blank');
   };
+
+  useEffect(() => {
+    const fetchContactInfo = async () => {
+        try {
+            const response = await axios.get(`https://api.joben.am/company_profile/${user_id}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            setContactInfo(response.data);
+            setFormData((prevState) => ({
+                ...prevState,
+                owner_email: response.data.email
+            }));
+        } catch (error) {
+            console.error('Error fetching contact info:', error);
+        }
+    };
+
+    fetchContactInfo();
+}, [accessToken]);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const validate = () => {
+        const newErrors = {};
+
+        if (!formData.email) {
+            newErrors.email = 'Email is required';
+        } else if (formData.email.length > 40) {
+            newErrors.email = 'Email can be maximum 40 characters'
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = 'Email address is invalid';
+        }
+
+        if (!formData.firstName || formData.firstName.length > 25 || formData.firstName.length < 3) {
+            newErrors.firstName = 'First Name is required and maximum can be 25 characters';
+        }
+        if (!formData.lastName || formData.lastName.length > 25 || formData.lastName.length < 3) {
+            newErrors.lastName = 'Last Name is required and maximum can be 25 characters';
+        }
+
+        if (!formData.phoneNumber) {
+            newErrors.phoneNumber = 'Contact number is required';
+        } else if (!/^(?:\+374\d{8}|0\d{8,9})$/.test(formData.phoneNumber)) {
+            newErrors.phoneNumbere = 'Contact number is invalid';
+        }
+        if (!formData.message || formData.message.length > 200 || formData.message.length < 4) {
+            newErrors.message = 'Message is required and must contain min 4 and max 200 characters.';
+        }
+
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validate()) {
+            return;
+        }
+        try {
+            const response = await axios.post('https://api.joben.am/send-email-contact', formData);
+            console.log('Message sent:', response.data);
+            // Clear the form
+            setFormData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                phoneNumber: "",
+                message: "",
+                owner_email: contactInfo.email
+            });
+            setMessage("Message sent successfully!")
+            new Promise((resolve) => {
+                setTimeout(resolve, 2000);
+              }).then(() => {
+                navigate('/');
+              });
+        } catch (error) {
+            setMessage('Failed, try again!')
+            setIsError(true);
+            console.error('Error sending message:', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchContactInfo = async () => {
+            try {
+                const response = await axios.get(`https://api.joben.am/company_profile/${user_id}`);
+                setContactInfo(response.data);
+            } catch (error) {
+                console.error('Error fetching contact info:', error);
+            }
+        };
+
+        fetchContactInfo();
+    }, []);
+
     return (
+        <div>
+        {(!accessToken && !company) && <NavBar />}
+             {(accessToken && !company) && <NavBarUser />}
+             {(accessToken && company) && <NavBarCompany />}
     <div className={styles.wrapper}>
         <div className={styles.contactInfo}>
             <div className={styles.contactInfoContainer}>
@@ -26,7 +162,7 @@ const ContactUs = ( ) => {
                     <p className={styles.contactInfoHeaderSubtitle}>Say something to start a live chat!</p>
                 </div>
                 <div className={styles.contactInfoAddresses}>
-                    <a className={styles.contactInfoAddressesPhone} href={`tel:${phoneNumber}`}>
+                    <a className={styles.contactInfoAddressesPhone} href={`tel:${contactInfo.contact_info}`}>
                         <svg className={styles.contactInfoAddressesPhoneLogo} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M20.0002 10.999H22.0002C22.0002 5.869 18.1272 2 12.9902 2V4C17.0522 4 20.0002 6.943 20.0002 10.999Z" fill="white"/>
                             <path d="M13.0003 8.00024C15.1033 8.00024 16.0003 8.89724 16.0003 11.0002H18.0003C18.0003 7.77524 16.2253 6.00024 13.0003 
@@ -39,16 +175,16 @@ const ContactUs = ( ) => {
                             17.5576 20.6788 17.3143 20.4863 17.1392L16.4223 13.4432Z" fill="white"/>
                         </svg>
                         {/* <p className={styles.contactInfoAddressesPhoneLogo}></p> */}
-                        <p className={styles.contactInfoAddressesPhoneValue}>{phoneNumber}</p>
+                        <p className={styles.contactInfoAddressesPhoneValue}>{contactInfo.contact_info}</p>
                     </a>
                     <div className={styles.contactInfoAddressesEmail}>
                         <svg className={styles.contactInfoAddressesEmailLogo} xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
                             <path d="M20 0H0V16H20V0ZM18 4L10 9L2 4V2L10 7L18 2V4Z" fill="white"/>
                         </svg>
                         {/* <p className={styles.contactInfoAddressesEmailLogo}></p> */}
-                        <button className={styles.contactInfoAddressesEmailValue} onClick={handleEmailClick}><p className={styles.contactInfoAddressesEmailValueParagraph} >{email}</p></button>
+                        <button className={styles.contactInfoAddressesEmailValue} onClick={handleEmailClick}><p className={styles.contactInfoAddressesEmailValueParagraph} >{contactInfo.email}</p></button>
                     </div>
-                    <div className={styles.contactInfoAddressesStreet}>     
+                    {/* <div className={styles.contactInfoAddressesStreet}>     
                         <svg className={styles.contactInfoAddressesStreetLogo} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                             <path d="M12 1.5C9.81276 1.50258 7.71584 2.3726 6.16923 3.91922C4.62261 5.46584 3.75259 7.56276 3.75001 9.75C3.74739 11.5374 4.33124 13.2763 5.41201 
                             14.7C5.41201 14.7 5.63701 14.9963 5.67376 15.039L12 22.5L18.3293 15.0353C18.3623 14.9955 18.588 14.7 18.588 14.7L18.5888 14.6978C19.669 13.2747 20.2526 
@@ -57,12 +193,12 @@ const ContactUs = ( ) => {
                             7.20912 10.8328 6.9234 11.4147 6.80764C11.9967 6.69189 12.5999 6.7513 13.1481 6.97836C13.6962 7.20542 14.1648 7.58994 14.4944 8.08329C14.8241 8.57664 15 9.15666 
                             15 9.75C14.999 10.5453 14.6826 11.3078 14.1202 11.8702C13.5578 12.4326 12.7954 12.749 12 12.75Z" fill="white"/>
                         </svg>
-                        {/* <p className={styles.contactInfoAddressesStreetLogo}></p> */}
+                        <p className={styles.contactInfoAddressesStreetLogo}></p>
                         <button onClick={handleMapClick} className={styles.contactInfoAddressesStreetValue}>
-                            <p className={styles.contactInfoAddressesStreetValueParagraph}>{address}</p>
+                            <p className={styles.contactInfoAddressesStreetValueParagraph}>{contactInfo.location}</p>
                         </button>
-                        {/* <p className={styles.contactInfoAddressesStreetValue}>{address}</p> */}
-                    </div>
+                        <p className={styles.contactInfoAddressesStreetValue}>{contactInfo.location}</p>
+                    </div> */}
                 </div>
                 <div className={styles.contactInfoSocMedias}>
                     <a className={styles.contactInfoSocMedia} href={instagramLink}>
@@ -70,65 +206,105 @@ const ContactUs = ( ) => {
                         47 16 47 L 34 47 C 41.167516 47 47 41.167516 47 34 L 47 16 C 47 8.8324839 41.167516 3 34 3 L 16 3 z M 16 5 L 34 5 C 40.086484 5 45 9.9135161 45 16 L 45 34 C 45 40.086484 
                         40.086484 45 34 45 L 16 45 C 9.9135161 45 5 40.086484 5 34 L 5 16 C 5 9.9135161 9.9135161 5 16 5 z M 37 11 A 2 2 0 0 0 35 13 A 2 2 0 0 0 37 15 A 2 2 0 0 0 39 13 A 2 2 0 0 0 37 11 z M 
                         25 14 C 18.936712 14 14 18.936712 14 25 C 14 31.063288 18.936712 36 25 36 C 31.063288 36 36 31.063288 36 25 C 36 18.936712 31.063288 14 25 14 z M 25 16 C 29.982407 16 34 20.017593 34 25 
-                        C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z"/></svg>
+                        C 34 29.982407 29.982407 34 25 34 C 20.017593 34 16 29.982407 16 25 C 16 20.017593 20.017593 16 25 16 z" fill="white"/></svg>
                     </a>
-                    <a className={styles.contactInfoSocMedia} href={facebookLink}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="21" viewBox="0 0 12 21" fill="none">
-                            <rect x="0.585938" y="0.40625" width="11.3657" height="20.3799" fill="url(#pattern0_1046_2159)"/>
-                            <defs>
-                            <pattern id="pattern0_1046_2159" patternContentUnits="objectBoundingBox" width="1" height="1">
-                            <use  transform="matrix(0.00580019 0 0 0.00320184 -0.969697 -0.344262)"/>
-                            </pattern>
-                            <image id="image0_1046_2159" width="512" height="512" />
-                            </defs>
-                        </svg>
-                    </a>
-                    <a className={styles.contactInfoSocMedia} href={ linkedinLink }><svg xmlns="http://www.w3.org/2000/svg"  width="22" height="21" viewBox="0 0 22 21" fill="none">
-                        <rect x="0.537109" y="0.796875" width="20.7719" height="19.988" fill="url(#pattern0_1046_2161)"/>
-                        <defs>
-                        <pattern id="pattern0_1046_2161" patternContentUnits="objectBoundingBox" width="1" height="1">
-                        <use  transform="matrix(0.00341981 0 0 0.0035636 -0.376488 -0.403509)"/>
-                        </pattern>
-                        <image id="image0_1046_2161" width="512" height="512" />
-                        </defs>
-                        </svg></a>
+                    <a href={facebookLink} target="_blank" rel="noopener noreferrer" className={styles.contactInfoSocMedia}>
+                                    <svg className={styles.contactInfoSocialLinksFacebookLogo} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M9 8H6V12H9V22H13V12H16L17 8H13V6C13 5.735 13.105 5.5 14 5.5H17V1H13C9.833 1 9 3.153 9 5V8Z" fill="white"/>
+                                    </svg>
+                                </a>
+                    <a href={linkedinLink} target="_blank" rel="noopener noreferrer" className={styles.contactInfoSocMedia}>
+                                    <svg className={styles.contactInfoSocialLinksLinkedinLogo} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M22.22 0H1.78C0.8 0 0 0.8 0 1.78V22.2C0 23.2 0.8 24 1.78 24H22.2C23.2 24 24 23.2 24 22.22V1.78C24 0.8 23.2 0 22.22 0ZM7.2 
+                                        20.5H3.5V9H7.2V20.5ZM5.3 7.2C4.1 7.2 3.2 6.2 3.2 5.2C3.2 4.1 4.1 3.2 5.3 3.2C6.4 3.2 7.3 4.1 7.3 5.2C7.3 6.3 6.4 7.2 5.3 7.2ZM20.8 
+                                        20.5H17.2V14.7C17.2 13.3 17.2 11.4 15.4 11.4C13.6 11.4 13.3 12.9 13.3 14.6V20.5H9.7V9H13.1V10.6H13.1C13.6 9.5 14.9 8.3 16.7 
+                                        8.3C20.6 8.3 20.8 11.1 20.8 14.2V20.5Z" fill="white"/>
+                                    </svg>
+                                </a>
                 </div>
             </div>
         </div>
+        <form onSubmit={handleSubmit}>
         <div className={styles.message}>
             <div className={styles.messageContainer}>
                 <div className={styles.messageInfo}>
                     <div className={styles.messageInfoName} >
-                        <p className={styles.messageInfoNameTitle}> First Name</p>
-                        <input type="text" className={styles.messageInfoNameInput} />
+                        <p className={styles.messageInfoNameTitle}>First Name</p>
+                        <input
+                         type="text"
+                         className={styles.messageInfoNameInput}
+                         name="firstName"
+                         value={formData.firstName}
+                         onChange={handleInputChange}
+                          />
+                          {errors.firstName && <p style={{ color: 'red', fontSize: '12px' }}>{errors.firstName}</p>}
                         <div className={styles.messageLine}></div>
                     </div>
                     <div className={styles.messageInfoLastname}>
                         <p className={styles.messageInfoLastnameTitle}>Last Name</p>
-                        <input type="text" className={styles.messageInfoNameInput} />
+                        <input
+                         type="text"
+                         className={styles.messageInfoNameInput}
+                         name="lastName"
+                         value={formData.lastName}
+                         onChange={handleInputChange}
+                          />
+                          {errors.lastName && <p style={{ color: 'red', fontSize: '12px' }}>{errors.lastName}</p>}
                         <div className={styles.messageLine}></div>
                     </div>
                     <div className={styles.messageInfoMail}>
                         <p className={styles.messageInfoMailTitle}>Email</p>
-                        <input type="mail" className={styles.messageInfoNameInput} />
+                        <input
+                         type="mail"
+                         className={styles.messageInfoNameInput}
+                         name="email"
+                         value={formData.email}
+                         onChange={handleInputChange}
+                          />
+                          {errors.email && <p style={{ color: 'red', fontSize: '12px' }}>{errors.email}</p>}
                         <div className={styles.messageLine}></div>
                     </div>
                     <div className={styles.messageInfoPhone}>
                         <p className={styles.messageInfoPhoneTitle}>Phone Number</p>
-                        <input type="number" className={styles.messageInfoNameInput} />
+                        <input
+                         type="tel"
+                         className={styles.messageInfoNameInput}
+                         name="phoneNumber"
+                         value={formData.phoneNumber}
+                         onChange={handleInputChange}
+                           />
+                           {errors.phoneNumber && <p style={{ color: 'red', fontSize: '12px' }}>{errors.phoneNumber}</p>}
                         <div className={styles.messageLine}></div>
                     </div>
                 </div>
                 <div className={styles.messageSendMessage}>
                     <p className={styles.messageInfoSendMessageTitle}>Message</p>
-                    <input type="text" className={styles.messageInfoSendMessageInput} placeholder="Write your message..."/>
+                    <input
+                     type="text"
+                      className={styles.messageInfoSendMessageInput}
+                      placeholder="Write your message..."
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      />
+                      {errors.message && <p style={{ color: 'red', fontSize: '12px' }}>{errors.message}</p>}
                     <div className={styles.messageLineSendMesssage}></div>
                 </div>
                 <div className={styles.messageBtnContainer}>
-                <button className={styles.messageBtn} type="Submit">Send Message</button>
+                <button className={styles.messageBtn} type="submit">Send Message</button>
+                </div>
+                <div className={styles.Message}>
+                        {message && (
+                                <div className={isError ? styles.ErrorMessage : styles.SuccessMessage}>
+                                    {message}
+                                </div>
+                            )}
                 </div>
             </div>
         </div>
+        </form>
+    </div>
+        <Footer />
     </div>
     );
 }

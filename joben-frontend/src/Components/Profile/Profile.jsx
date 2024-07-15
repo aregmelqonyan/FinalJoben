@@ -2,7 +2,6 @@ import Skills from '../Skills';
 import Language from '../Language';
 import Experience from '../Experience';
 import UserProfileHeader from '../UserProfileHeader';
-import LicenseCertificate from '../LicenseCertificate';
 import Education from '../Education';
 import NavBarUser from '../../Layout/NavBarUser';
 import { useNavigate } from 'react-router-dom'

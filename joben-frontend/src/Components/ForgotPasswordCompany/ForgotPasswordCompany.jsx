@@ -23,7 +23,7 @@ const ForgotPasswordCompany = () => {
     }
     setErrors({});
     try {
-      const response = await axios.post('http://localhost:8000/password-reset-company', { email });
+      const response = await axios.post('https://api.joben.am/password-reset-company', { email });
       setMessage(response.data.message);
       setIsSubmitted(true);
 

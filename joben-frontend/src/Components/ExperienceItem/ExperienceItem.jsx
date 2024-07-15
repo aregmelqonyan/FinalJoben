@@ -17,7 +17,7 @@ const ExperienceItem = () => {
 
     const fetchExperience = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/experience/${user_id}`);
+            const response = await axios.get(`https://api.joben.am/experience/${user_id}`);
             setExperience(response.data);
         } catch (error) {
         } finally {

@@ -23,7 +23,7 @@ const CompanyProfile = () => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/get_company_users');
+        const response = await axios.get('https://api.joben.am/get_company_users');
         setCompanies(response.data);
       } catch (error) {
         setError(error.message);
@@ -50,7 +50,8 @@ const CompanyProfile = () => {
   };
 
   const handleCompanyClick = (user_id) => {
-    navigate(`/item/${user_id}`);
+    console.log("I am here")
+    navigate(`/profile_company/${user_id}`);
   };
 
   if (loading) {

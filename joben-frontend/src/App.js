@@ -23,7 +23,7 @@ import ContactUs from "./Components/ContactUs";
 import ForgotPassword from "./Components/ForgotPassword";
 import ForgotPasswordCompany from "./Components/ForgotPasswordCompany";
 import CompanyProfileItem from "./Components/CompanyProfileItem";
-import ExperienceItem from "./Components/ExperienceItem";
+// import ExperienceItem from "./Components/ExperienceItem";
 
 const App = () => {
   return (
@@ -49,12 +49,14 @@ const App = () => {
         <Route path="/profileCompany" element={<ProfileCompany />} />
         <Route path='/posted-jobs' element={<PostedJobs />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/contactus/:user_id" element={<ContactUs />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/forgot_company" element={<ForgotPasswordCompany />} />
         <Route path="/profile_company" element={<CompanyProfileItem />} />
-        <Route path="/postedjobs/:companyId" element={<PostedJobs />} />
-        <Route path="/item/:user_id" element={<ExperienceItem />} />
+        <Route path="/profile_company/:user_id" element={<CompanyProfileItem />} />
+        <Route path="/postedjobs/:user_id" element={<PostedJobs />} />
+
+        {/* <Route path="/item/:user_id" element={<ExperienceItem />} /> */}
       </Routes>
     </Router>
   

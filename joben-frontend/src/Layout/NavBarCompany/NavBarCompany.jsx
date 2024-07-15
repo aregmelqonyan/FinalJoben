@@ -12,9 +12,11 @@ const NavBarCompany = () => {
   const company = localStorage.getItem('company');
   const refresh = localStorage.getItem('refreshToken');
 
+
   const refreshToken = async () => {
     try {
-        const response = await axios.post('http://localhost:8000/refresh_token', {
+
+        const response = await axios.post('https://api.joben.am/refresh_token', {
             refresh_token: refresh,
         });
         localStorage.setItem('accessToken', response.data.access_token);
@@ -37,15 +39,16 @@ const NavBarCompany = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  useEffect(() => {
-    const checkTokenExpiry = async () => {
-      const accessToken = localStorage.getItem('accessToken');
-      if (!accessToken) {
-        await refreshToken();
-      }
-    };
-    checkTokenExpiry();
-  }, []);
+    useEffect(() => {
+      if (company) {
+      const checkTokenExpiry = async () => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+          await refreshToken();
+        }
+      };
+      checkTokenExpiry();
+    }}, []);
 
 
   return (

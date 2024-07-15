@@ -4,17 +4,23 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styles from './JobItem.module.css';
 import NavBar from '../../Layout/NavBar';
 import Footer from '../../Layout/Footer';
+import NavBarCompany from '../../Layout/NavBarCompany';
+import NavBarUser from '../../Layout/NavBarUser';
 
 const JobItem = () => {
   const { job_id } = useParams();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const company = localStorage.getItem('company');
+  const token = localStorage.getItem('accessToken');
+
+  const navbar = company ? <NavBarCompany /> : token ? <NavBarUser /> : <NavBar />
 
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/jobs/${job_id}`);
+        const response = await axios.get(`https://api.joben.am/jobs/${job_id}`);
         setJob(response.data);
         setLoading(false);
       } catch (error) {
@@ -24,7 +30,7 @@ const JobItem = () => {
     };
 
     fetchJob();
-    axios.put(`http://localhost:8000/jobs/${job_id}/views`)
+    axios.put(`https://api.joben.am/jobs/${job_id}/views`)
       .then(() => console.log('View count updated'))
       .catch(error => console.error('Error updating view count:', error));
   }, [job_id]);
@@ -51,7 +57,8 @@ const JobItem = () => {
   });
 
   return (
-    <div><NavBar />
+    <div>
+      {navbar}
     <div className={styles['job-details']}>
       <h2>{job.title}</h2>
       <p>{job.description}</p>

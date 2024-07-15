@@ -28,7 +28,7 @@ const Jobs = () => {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/jobs");
+                const response = await axios.get("https://api.joben.am/jobs");
                 setJobs(response.data);
                 setFilteredJobs(response.data);
             } catch (error) {

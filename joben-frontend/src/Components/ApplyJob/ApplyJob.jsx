@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ApplyJob.module.css'; 
 import NavBar from '../../Layout/NavBar';
+import NavBarCompany from '../../Layout/NavBarCompany';
+import NavBarUser from '../../Layout/NavBarUser';
 import { NavLink, useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -17,6 +19,9 @@ export default function ApplyJob() {
   const location = useLocation();
   const [jobTitle, setJobTitle] = useState('');
   const navigate = useNavigate();
+  const company = localStorage.getItem('company');
+  const token = localStorage.getItem('accessToken');
+  const navbar = company ? <NavBarCompany /> : token ? <NavBarUser /> : <NavBar />
   
 
   useEffect(() => {
@@ -36,10 +41,10 @@ export default function ApplyJob() {
         last_name: formData.lastName,
         job_title: jobTitle,
         contact_info: formData.phoneNumber,
-	user_email: formData.userEmail
+	      user_email: formData.userEmail,
       };
   
-      const response = await axios.post('http://localhost:8000/send-email', requestData);
+      const response = await axios.post('https://api.joben.am/send-email', requestData);
   
       // Check the response and handle accordingly
       if (response.status === 200) {
@@ -50,7 +55,7 @@ export default function ApplyJob() {
           lastName: '',
           phoneNumber: '',
           email: '',
-	  userEmail: ''
+	        userEmail: ''
         });
         // Hide success message after 5 seconds
         setTimeout(() => {
@@ -75,9 +80,10 @@ export default function ApplyJob() {
     setFormData({ ...formData, [name]: value });
   };
 
+
   return (
     <div>
-      <NavBar />
+      {navbar}
       <div className={styles.app}>
         <div className={styles.applicationBox}>
           <h2>Application Form</h2>
@@ -122,6 +128,7 @@ export default function ApplyJob() {
               />
               <label>Email</label>
             </div>
+           
             <NavLink to='/jobs'>
               <button type="submit" className={styles.button} onClick={handleSubmit}>
                 <span></span>

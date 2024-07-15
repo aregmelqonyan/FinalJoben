@@ -21,7 +21,7 @@ const Verification = () => {
     const [showSuccess, setShowSuccess] = useState(false);
     const handleVerifyClick = () => {
         const input_code = inputs.join(""); 
-        axios.post("http://localhost:8000/verify", {email, 
+        axios.post("https://api.joben.am/verify", {email, 
             input_code
         })
         .then(response => {

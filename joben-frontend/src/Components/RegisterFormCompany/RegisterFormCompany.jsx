@@ -82,7 +82,7 @@ const RegisterFormCompany = () => {
 
         try {
             const verification_code = '';
-            const response = await axios.post('http://localhost:8000/register_company', { username, email, company, contact_info: contactInfo, password, verification_code });
+            const response = await axios.post('https://api.joben.am/register_company', { username, email, company, contact_info: contactInfo, password, verification_code });
             setSuccessMessage('Registered Successfully');
             navigate('/verify_company');
         } catch (error) {

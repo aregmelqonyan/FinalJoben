@@ -48,7 +48,7 @@ const AddSkills = () => {
         try {
             if(!company) {
                 const response = await axios.post(
-                    'http://localhost:8000/add_skill',
+                    'https://api.joben.am/add_skill',
                     { skill: skillInput },
                     { headers: { Authorization: `Bearer ${token}` } }
                     
@@ -59,7 +59,7 @@ const AddSkills = () => {
             else{
                 console.log(5000)
                 const response = await axios.post(
-                'http://localhost:8000/add_company_skill',
+                'https://api.joben.am/add_company_skill',
                 { skill: skillInput },
                 { headers: { Authorization: `Bearer ${token}` } }
                 

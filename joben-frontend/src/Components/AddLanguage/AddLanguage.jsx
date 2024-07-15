@@ -12,6 +12,7 @@ const AddLanguage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedProficiency, setSelectedProficiency] = useState(null);
+  const company = localStorage.getItem('company');
 
   const toggleComponents = () => {
     setAddLanguageButton(!addLanguageButton);
@@ -39,8 +40,8 @@ const AddLanguage = () => {
 
   const handleSaveLanguage = async () => {
     try {
-      
-      const response = await axios.post('http://localhost:8000/add_language', {
+      const endpoint = company ? 'https://api.joben.am/add_company_language' : 'https://api.joben.am/add_language';
+      const response = await axios.post(endpoint, {
         language: selectedOption,
         proficiency: languageTypes[selectedProficiency],
       }, {
@@ -52,7 +53,8 @@ const AddLanguage = () => {
       toggleComponents();
       // Optionally, you can reset states or perform other actions after successful save
     } catch {
-        const response = await axios.post('http://localhost:8000/add_company_language', {
+      try{
+        const response = await axios.post('https://api.joben.am/add_company_language', {
             language: selectedOption,
             proficiency: languageTypes[selectedProficiency],
           }, {
@@ -62,6 +64,10 @@ const AddLanguage = () => {
           });
           console.log('Language added successfully:', response.data);
           toggleComponents();
+        }
+        catch {
+          toggleComponents()
+        }
       // Handle error
     }
   };

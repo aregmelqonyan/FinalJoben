@@ -24,7 +24,7 @@ const NavBarUser = () => {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/refresh_token', {
+      const response = await axios.post('https://api.joben.am/refresh_token', {
         refresh_token: refresh,
       });
       localStorage.setItem('accessToken', response.data.access_token);

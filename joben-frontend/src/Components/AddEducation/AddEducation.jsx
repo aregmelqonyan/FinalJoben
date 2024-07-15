@@ -14,6 +14,7 @@ const AddEducation = () => {
         end_date: '',
         currently_studying: false
     });
+    const company = localStorage.getItem('company');
 
     const toggleComponents = () => {
         setCancelButton(!cancelButton);
@@ -35,7 +36,8 @@ const AddEducation = () => {
         }
         
         try {
-            const response = await axios.post('http://localhost:8000/user/education', dataToSend, {
+            const endpoint = company ? 'https://api.joben.am/companyuser/education' : 'https://api.joben.am/user/education'
+            const response = await axios.post(endpoint, dataToSend, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -47,7 +49,7 @@ const AddEducation = () => {
             // Handle success, maybe switch to the education list view
             toggleComponents();
         } catch {
-            const response = await axios.post('http://localhost:8000/companyuser/education/', dataToSend, {
+            const response = await axios.post('https://api.joben.am/companyuser/education/', dataToSend, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },

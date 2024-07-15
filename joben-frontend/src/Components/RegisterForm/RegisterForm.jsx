@@ -73,7 +73,7 @@ const RegisterForm = () => {
 
         try {
             const verification_code = '';
-            await axios.post('http://localhost:8000/register', { username, email, contact_info: contactInfo, password, verification_code });
+            await axios.post('https://api.joben.am/register', { username, email, contact_info: contactInfo, password, verification_code });
             setSuccessMessage("Registered Successfully!");
             navigate('/verify');
         } catch (error) {

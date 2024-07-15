@@ -21,7 +21,7 @@ const LoginForm = () => {
             formData.append('username', username);
             formData.append('password', password);
             setIsLoading(true); // Set loading state to true
-            const response = await axios.post('http://localhost:8000/login', formData);
+            const response = await axios.post('https://api.joben.am/login', formData);
             setSuccessMessage("Successfully logged in!");
             setErrorMessage('');
             const { access_token, refresh_token } = response.data;

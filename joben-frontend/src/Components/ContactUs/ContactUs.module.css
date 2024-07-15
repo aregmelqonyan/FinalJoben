@@ -1,8 +1,8 @@
 /* src/App.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-body{
+/* body{
     background-color: gray;
-}
+} */
 
 .wrapper{
     display: flex;
@@ -83,7 +83,6 @@ body{
     justify-content: space-between;
     width: 190px;
     height: 24px;    
-    gap: 27px;
 }
 
 .contactInfoAddressesPhoneLogo{
@@ -181,12 +180,31 @@ body{
 .contactInfoSocMedia{
     width: 40px;
     height: 40px;
-    background-color: #FFFFFF;
+    color: #FFFFFF;
     align-items: center;
     justify-content: center;
     display: flex;
     border-radius: 50%;
 }
+
+.ErrorMessage {
+    color: #ff4d4d;
+    background-color: #ffe6e6;
+    border: 1px solid #ff4d4d;
+    padding: 10px;
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Styles for the success message */
+  .SuccessMessage {
+    color: #4CAF50;
+    background-color: #e8f5e9;
+    border: 1px solid #4CAF50;
+    padding: 10px;
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
 
 .contactInfoSocMedia{
     color:#4141BF;

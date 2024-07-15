@@ -57,7 +57,7 @@ export default function CreateJob()  {
       if (!accessToken) {
         return;
     }
-      const response = await axios.post('http://localhost:8000/jobs/', formData, {
+      const response = await axios.post('https://api.joben.am/jobs/', formData, {
         headers: {
         Authorization: `Bearer ${accessToken}`,
         }

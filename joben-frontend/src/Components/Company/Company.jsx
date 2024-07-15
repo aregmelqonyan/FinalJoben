@@ -239,7 +239,7 @@ export default function Company() {
     const fetchUserData = async (userId) => {
       try {
         // Fetch user data from `/company_user/user_id`
-        const userDataResponse = await axios.get(`http://localhost:8000/company_user/${userId}`);
+        const userDataResponse = await axios.get(`https://api.joben.am/company_user/${userId}`);
         // Assuming the user data is available in response.data
         const userData = userDataResponse.data;
         

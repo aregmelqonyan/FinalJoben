@@ -2,35 +2,55 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './CompanyUserProfileHeader.module.css';
 import logo from '../../Assets/ProfilePicture.png';
+import { NavLink, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { FaClipboardList } from "react-icons/fa";
 
 const CompanyUserProfileHeader = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const {user_id} = useParams();
+  const navigate = useNavigate();
+  const company = localStorage.getItem('company');
   const [userData, setUserData] = useState({
     username: '',
     contact_info: '',
     email: '',
-    image: null
+    image: null,
+    company: ''
   });
+
+  const pathname = company ? '/posted-jobs' : `/postedjobs/${user_id}`;
 
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('accessToken');
       try {
-        const response = await axios.get('http://localhost:8000/company_profile', {
+        if (!user_id){
+        const response = await axios.get('https://api.joben.am/company_profile', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
+        
         const { username, contact_info, email, image } = response.data;
-        setUserData({ username, contact_info, email, image });
-      } catch (error) {
-        console.error('Error fetching user data', error);
+        setUserData({ username, contact_info, email, image, company });
+      } 
+      else {
+        throw("Error")
+      }
+    }catch{
+        try{
+          const response = await axios.get(`https://api.joben.am/company_profile/${user_id}`);
+          const { username, contact_info, email, image } = response.data;
+          setUserData({ username, contact_info, email, image });
+        }
+        catch (error) {
+          console.error('Error fetching user data', error);
+        }
       }
     };
 
     fetchUserData();
   }, []);
-
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -40,7 +60,7 @@ const CompanyUserProfileHeader = () => {
 
     try {
       const token = localStorage.getItem('accessToken');
-      const response = await axios.post('http://localhost:8000/upload-image-company', formData, {
+      const response = await axios.post('https://api.joben.am/upload-image-company', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -57,6 +77,10 @@ const CompanyUserProfileHeader = () => {
     }
   };
 
+  const handleContact = () => {
+    navigate(`/contactus/${user_id}`)
+  }
+
   return (
     <div className={styles.ProfileName}>
       <div className={styles.ProfileNameItems}>
@@ -70,6 +94,7 @@ const CompanyUserProfileHeader = () => {
           />
         ) : (
           <div className={styles.ProfileNameItemsPicturePlaceholder}>
+            {!user_id && (
             <div className={styles.UploadContainer}>
             <img src={logo} className={styles.ProfileNameItemsPicture} alt="Profile" />
               <label htmlFor="fileInput" className={styles.UploadButton}>+</label>
@@ -77,10 +102,9 @@ const CompanyUserProfileHeader = () => {
                 id="fileInput"
                 type="file"
                 onChange={handleFileChange}
-                
-                
               />
             </div>
+            )}
           </div>
         )}
         <div className={styles.ProfileNameItemsTextItems}>
@@ -111,10 +135,17 @@ const CompanyUserProfileHeader = () => {
               </svg>
               <p className={styles.ProfileNameItemsLinksText}>Melbourne, Australia</p>
             </div>
+            <NavLink to={{pathname: pathname}}><FaClipboardList /> Posted Jobs</NavLink>
           </div>
         </div>
       </div>
+      {company !== userData.company && (
+      <div>
+          <button className={styles.ContactUser} onClick={handleContact}>Contact Us</button>
+        </div>
+      )}
     </div>
+    
   );
 };
 

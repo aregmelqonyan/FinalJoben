@@ -13,8 +13,11 @@ import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import coverImage from '../../Assets/img.png';
 import profImage from '../../Assets/bg.png';
+import { useParams } from 'react-router-dom';
 
 export default function ProfileCompany() {
+  const {company_id} = useParams();
+  const company = localStorage.getItem('company');
   const [showOptions, setShowOptions] = useState(false);
   const [name, setName] = useState("Name Surname");
   const [bio, setBio] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat");
@@ -98,11 +101,11 @@ export default function ProfileCompany() {
           navigate('/login');
         }
         // Fetch user profile data using the access token
-        const response = await axios.get('http://localhost:8000/profile', {
+        const response = company ? await axios.get('https://api.joben.am/profile', {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }
-        });
+        }): await axios.get("https://api.joben.am/profile${user_id}");
         setUser(response.data);
         
       } catch (error) {
@@ -114,9 +117,9 @@ export default function ProfileCompany() {
   }, []);
 
   // If user is not authenticated, redirect to login page
-  if (!user) {
-    navigate('/login');
-  }
+  // if (!user) {
+  //   navigate('/login');
+  // }
 
   const toggleOptions = () => {
     setShowOptions(!showOptions);

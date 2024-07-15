@@ -16,7 +16,7 @@ const UserProfileHeader = () => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('accessToken');
       try {
-        const response = await axios.get('http://localhost:8000/me', {
+        const response = await axios.get('https://api.joben.am/me', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -40,7 +40,7 @@ const UserProfileHeader = () => {
 
     try {
       const token = localStorage.getItem('accessToken');
-      const response = await axios.post('http://localhost:8000/upload-image', formData, {
+      const response = await axios.post('https://api.joben.am/upload-image', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

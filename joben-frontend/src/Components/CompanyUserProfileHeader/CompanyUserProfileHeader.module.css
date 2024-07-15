@@ -147,3 +147,12 @@
   input[type="file"] {
     display: none; /* Hide the file input */
   }
+
+  .ContactUser {
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+    color: #4141BF;
+    padding-top: 30%;
+  }

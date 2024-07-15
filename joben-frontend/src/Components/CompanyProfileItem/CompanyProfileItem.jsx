@@ -1,30 +1,24 @@
 import Skills from '../Skills';
 import Language from '../Language';
-import Experience from '../Experience';
 import CompanyUserProfileHeader from '../CompanyUserProfileHeader';
-import NavBarCompanys from '../../Layout/NavBarCompany';
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react';
 import Footer from '../../Layout/Footer'
 import ExperienceCompany from '../ExperienceCompany';
 import Education from '../Education';
-import LicenseCertificate from '../LicenseCertificate';
+import NavBar from '../../Layout/NavBar';
+import NavBarCompany from '../../Layout/NavBarCompany';
+import NavBarUser from '../../Layout/NavBarUser';
 
 
 function CompanyProfileItem() {
-  const token = localStorage.getItem('accessToken');
-  const navigate = useNavigate();
+  const accessToken = localStorage.getItem('accessToken');
+  const company = localStorage.getItem('company');
 
-  useEffect(() => {
-  
-    if (!token) {
-        navigate('/login')
-    }
-  }, [token, navigate]);
 
   return (
     <>
-      <NavBarCompanys />
+      {(!accessToken && !company) && <NavBar />}
+      {(accessToken && !company) && <NavBarUser />}
+      {(accessToken && company) && <NavBarCompany />}
       <CompanyUserProfileHeader/>
       <ExperienceCompany/>
       <Education/> /

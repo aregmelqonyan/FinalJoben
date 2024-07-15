@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './ExperienceCompany.module.css';
 import AddExperience from '../AddExperience';
 import logo from '../../Assets/linkedin.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ExperienceCompany = () => {
     const [experience, setExperience] = useState([]);
@@ -13,10 +13,11 @@ const ExperienceCompany = () => {
     const token = localStorage.getItem('accessToken');
     const refresh = localStorage.getItem('refreshToken');
     const navigate = useNavigate();
+    const {user_id} = useParams();
 
     const refreshToken = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/refresh_token', {
+            const response = await axios.post('https://api.joben.am/refresh_token', {
                 refresh_token: refresh,
             });
             localStorage.setItem('accessToken', response.data.access_token);
@@ -30,27 +31,38 @@ const ExperienceCompany = () => {
 
     const fetchExperience = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/companyuser/experience/', {
+            if (!user_id){
+            const response = await axios.get('https://api.joben.am/companyuser/experience/', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
             setExperience(response.data);
-        } catch (error) {
+        }else{throw error}}
+        catch{
+            try{
+                const response = await axios.get(`https://api.joben.am/companyuser/experience/${user_id}`);
+                setExperience(response.data);
+            }
+        
+         catch (error) {
             
             if (error.response && error.response.status === 401) {
                 const newToken = await refreshToken();
                 if (newToken) {
                     try {
-                        const response = await axios.get('http://localhost:8000/companyuser/experience/', {
+                        const response = await axios.get('https://api.joben.am/companyuser/experience/', {
                             headers: {
                                 'Authorization': `Bearer ${newToken}`
                             }
                         });
                         setExperience(response.data);
-                    } catch (error) {
-                        setError(error.message);
-                    }
+                    } 
+                        catch (error) {
+                            setError(error.message);
+                        }
+                    
+                    
                 } else {
                     setError('Unable to refresh token. Please log in again.');
                 }
@@ -58,7 +70,7 @@ const ExperienceCompany = () => {
                 // navigate('/login')
                 setError(error.message);
             }
-        } finally {
+        } }finally {
             setLoading(false);
         }
     };
@@ -90,12 +102,15 @@ const ExperienceCompany = () => {
                 <div className={styles.experienceContainer}>
                     <div className={styles.experienceHeader}>
                         <h3 className={styles.experienceHeaderTitle}>Experience</h3>
+                        {!user_id && (
                         <div className={styles.experienceButtons}>
                             <button className={styles.addButton} onClick={toggleComponents}>+</button>
                             <button className={styles.editButton}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 <path d="M5 19H6.425L16.2 9.225L14.775 7.8L5 17.575V19ZM3 21V16.75L16.2 3.575C16.4 3.39167 16.621 3.25 16.863 3.15C17.105 3.05 17.359 3 17.625 3C17.891 3 18.1493 3.05 18.4 3.15C18.6507 3.25 18.8673 3.4 19.05 3.6L20.425 5C20.625 5.18333 20.771 5.4 20.863 5.65C20.955 5.9 21.0007 6.15 21 6.4C21 6.66667 20.9543 6.921 20.863 7.163C20.7717 7.405 20.6257 7.62567 20.425 7.825L7.25 21H3ZM15.475 8.525L14.775 7.8L16.2 9.225L15.475 8.525Z" fill="black"/>
 </svg></button>
+                        
                         </div>
+                        )}
                     </div>
                     <div className={styles.ExperienceList}>
                         {experience.map((exp, index) => (
